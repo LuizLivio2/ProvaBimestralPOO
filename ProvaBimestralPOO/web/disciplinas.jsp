@@ -9,10 +9,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="WEB-INF/jspf/head.jspf"%>
         <title>Disciplinas</title>
     </head>
     <body>
+        <%@include file="WEB-INF/jspf/navbar.jspf"%>
         <% 
             if (request.getParameter("botaoAlterar") != null){
                 int i = Integer.parseInt(request.getParameter("i"));
@@ -27,25 +28,23 @@
             }
         
         %>
-        
-        
         <div>
             <h1 style="text-align: center">Disciplinas</h1>
         </div>
-        <table border="1">
-            <tr>
+        <table class="table">
+            <thead style='text-align: center'>
                 <th>Disciplina</th>
                 <th>Ementa</th>
                 <th>Ciclo</th>
                 <th>Nota</th>
                 <th>Alterar Nota</th>
-            </tr>
+            </thead>
             
             <% 
                 for (int i = 0; i < Disciplina.getList().size();i++){
                     Disciplina disciplina = Disciplina.getList().get(i); %>
                     <tr>
-                        <td><%= disciplina.getNome() %></td>
+                        <td style='text-align: center'><%= disciplina.getNome() %></td>
                         <td><%= disciplina.getEmenta() %></td>
                         <td><%= disciplina.getCiclo() %></td>
                         <td><%= disciplina.getNota() %></td>
@@ -53,7 +52,7 @@
                             <form method="get">
                                 <div>
                                     <input type="text" name="nota" value="<%= disciplina.getNota() %>"/>
-                                    <input type="submit" name="botaoAlterar" value="Alterar!"/>
+                                    <input type="submit" name="botaoAlterar" class="btn btn-primary mb-2" value="Alterar!"/>
                                     <input type="hidden" name="i" value="<%= i %>"/>
                                 </div>
                             </form>
@@ -62,5 +61,6 @@
                 <%}%>
             
         </table>
+    <%@include file="WEB-INF/jspf/body-scripts.jspf"%>
     </body>
 </html>

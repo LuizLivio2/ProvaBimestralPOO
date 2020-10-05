@@ -1,5 +1,5 @@
 <%-- 
-    Document   : index
+    Document   : sobre
     Created on : 5 de out de 2020, 00:41:39
     Author     : Luiz Livio
 --%>
@@ -8,13 +8,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="WEB-INF/jspf/head.jspf"%>
         <title>Página Inicial</title>
+        <style>
+            .table{
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
-        <h1>Prova Bimestral de POO</h1>
-        <h2>Nome: Luiz Paulo Livio dos Santos</h2>
-        <h2>RA: 1290481813022</h2>
-        <h2><a href="https://github.com/luizlivio/ProvaBimestralPOO">Link do Repositório no GitHub</a></h2>
+        <%@include file="WEB-INF/jspf/navbar.jspf"%>
+        <table class="table">
+            <thead>
+                <th>Sobre</th>
+            </thead>
+                <tr><td>Nome: Luiz Paulo Livio dos Santos</td></tr>
+                <tr><td>RA: 1290481813022</td></tr>
+                <tr><td><a href="https://github.com/luizlivio/ProvaBimestralPOO">Link do Repositório no GitHub</a></td></tr>
+        </table>
+        <%@include file="WEB-INF/jspf/body-scripts.jspf"%>
     </body>
 </html>

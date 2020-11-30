@@ -14,7 +14,28 @@
     </head>
     <body>
         <%@include file="WEB-INF/jspf/navbar.jspf"%>
-        <% 
+        <% String exceptionMessage = null;
+            if (request.getParameter("FormInsert") != null){
+                try{
+                    String insNome = request.getParameter("nome");
+                    String insEmenta = request.getParameter("ementa");
+                    int insCiclo = Integer.parseInt(request.getParameter("ciclo"));
+                    Disciplina.insertDisciplina(insNome, insEmenta, insCiclo);
+                    response.sendRedirect(request.getRequestURI());
+                }catch (Exception ex){
+                    exceptionMessage = ex.getLocalizedMessage();
+                }
+            }
+            
+            if (request.getParameter("botaoExcluir") != null){
+                try{
+                    Long cod = Long.parseLong(request.getParameter("cod"));
+                    Disciplina.deleteDisciplina(cod);
+                }catch(Exception ex){
+                    exceptionMessage = ex.getLocalizedMessage();
+                }
+            }
+            
             if (request.getParameter("botaoAlterar") != null){
                 int i = Integer.parseInt(request.getParameter("i"));
                 float notaEdit = Float.parseFloat(request.getParameter("nota"));
@@ -49,7 +70,7 @@
                 <th>Ementa</th>
                 <th>Ciclo</th>
                 <th>Nota</th>
-                <th>Alterar Nota</th>
+                <th>Comandos</th>
             </thead>
             
             <% 
@@ -65,7 +86,9 @@
                                 <div>
                                     <input type="text" name="nota" value="<%= disciplina.getNota() %>"/>
                                     <input type="submit" name="botaoAlterar" class="btn btn-primary mb-2" value="Alterar!"/>
+                                    <input type="submit" name="botaoExcluir" class="btn btn-danger mb-2" value="Excluir!"/>
                                     <input type="hidden" name="i" value="<%= i %>"/>
+                                    <input type="hidden" name="cod" value="<%= disciplina.getRowId() %>"/>
                                 </div>
                             </form>
                         </td>

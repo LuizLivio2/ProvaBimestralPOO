@@ -31,6 +31,18 @@
         <div>
             <h1 style="text-align: center">Disciplinas</h1>
         </div>
+        <hr>
+        <div>
+            <h3>Inserir nova Disciplina:</h3>
+            <form method="get">
+                Nome da Disciplina: <input type="text" name="nome"/>
+                Ementa: <input type="text" name="ementa"/>
+                Ciclo: <input type="text" name="ciclo"/>
+                <input type="submit" name="FormInsert" class="btn btn-primary mb-2" value="Inserir" />
+                <input type="submit" name="Cancelar" class="btn btn-primary mb-2" value="Cancelar" />
+            </form>
+        </div>
+        <hr>
         <table class="table">
             <thead style='text-align: center'>
                 <th>Disciplina</th>

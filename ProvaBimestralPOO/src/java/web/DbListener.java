@@ -27,6 +27,58 @@ public class DbListener implements ServletContextListener {
     
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        String etapa = "Inicializando...";
+        Connection conn = null;
+        Statement stmt = null;
+        try{
+            etapa = "Registrando a classe do driver...";
+            Class.forName(CLASS_NAME);
+            etapa = "Conectando ao banco de dados...";
+            conn = getConnection();
+            etapa = "Criando tabela de Disciplinas...";
+            stmt = conn.createStatement();
+            stmt.execute(Disciplina.getCreateStatement());
+            if (Disciplina.getList().isEmpty()){
+                stmt.execute("INSERT INTO disciplinas VALUES ("
+                        + "'Gestão de Projetos',"
+                        + "'Definição de projeto segundo concepção difundida pelas melhores práticas de gestão de projetos',"
+                        + "'5'");
+                stmt.execute("INSERT INTO disciplinas VALUES ("
+                        + "'Ética',"
+                        + "'Ética; comportamento profissional ético. Moral e Direito',"
+                        + "'5'");
+                stmt.execute("INSERT INTO disciplinas VALUES ("
+                        + "'Laboratório Eng. Software',"
+                        + "'Desenvolvimento de um software utilizando os conhecimentos adquiridos ao longo do curso',"
+                        + "'5'");
+                stmt.execute("INSERT INTO disciplinas VALUES ("
+                        + "'Programação Orientada a Objetos',"
+                        + "'Conceitos e evolução da tecnologia de orientação a objetos',"
+                        + "'4'");
+                stmt.execute("INSERT INTO disciplinas VALUES ("
+                        + "'Programação para Mobile',"
+                        + "'Ambientes de programação para dispositivos móveis',"
+                        + "'5'");
+                stmt.execute("INSERT INTO disciplinas VALUES ("
+                        + "'Sistemas Operacionais II',"
+                        + "'Apresentação de um sistema operacional específico utilizado em ambiente corporativo',"
+                        + "'4'");
+                stmt.execute("INSERT INTO disciplinas VALUES ("
+                        + "'Trabalho de Graduação I',"
+                        + "'O estudante elaborará, sob a orientação de docente, um Trabalho de Graduação',"
+                        + "'5'");
+            }
+        }catch (Exception ex){
+            throw ex;
+        }finally{
+            try{
+                conn.close();
+            }catch (Exception ex2){}
+            try{
+                stmt.close();
+            }catch (Exception ex2){}
+        }
+    
     }
 
     @Override
